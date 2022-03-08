@@ -1,5 +1,6 @@
 package com.br.generation.LojaGame.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class ProdutoModel {
 	private String descricao;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("produto")
 	private CategoriaModel categoria;
 	

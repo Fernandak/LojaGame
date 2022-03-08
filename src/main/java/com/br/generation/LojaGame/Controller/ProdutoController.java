@@ -24,46 +24,53 @@ import com.br.generation.LojaGame.repository.ProdutoRepository;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 
+
 	@Autowired
+	
 	private ProdutoRepository repository;
 	
+	/*
+	public void setRepository(ProdutoRepository repository) {
+		this.repository = repository;
+	}  aqui faz a mesma coisa que o autowired */
+
 	@GetMapping
 	public ResponseEntity<List<ProdutoModel>> getAll(){
-		
+
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<ProdutoModel> getById(@PathVariable long id){
-		
+
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
-	@GetMapping("/nome/{nome}")
+
+	@GetMapping("/nome{nome}")
 	public ResponseEntity<List<ProdutoRepository>> getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<ProdutoModel> post (@RequestBody ProdutoModel produto){
-		
+
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(repository.save(produto));
-		
+
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<ProdutoModel> put(@RequestBody ProdutoModel produto){
-		
+
 		return ResponseEntity.ok(repository.save(produto));
-		
+
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
-		
+
 		repository.deleteById(id);
 	}
 }
-	
+

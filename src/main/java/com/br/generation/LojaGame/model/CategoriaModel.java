@@ -45,9 +45,8 @@ public class CategoriaModel {
 	private String estrategia;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("tb_categoria")
+	@JsonIgnoreProperties("categoria")
 	private List<ProdutoModel> produto;
-	
 
 	public long getId() {
 		return id;
@@ -104,7 +103,6 @@ public class CategoriaModel {
 	public void setProduto(List<ProdutoModel> produto) {
 		this.produto = produto;
 	}
-
-		
+	
 
 }
